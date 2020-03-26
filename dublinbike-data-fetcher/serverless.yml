@@ -1,0 +1,63 @@
+service: dublinbike-data-fetcher
+# app and org for use with dashboard.serverless.com
+app: dublinbike-data-fetcher-app
+org: domokatavic
+
+custom:
+  # Change base name for your app as S3 bucket name is globally unique
+  bucketBaseName: 'dublin-bikes-dom'
+  bucketName: ${self:custom.bucketBaseName}-${opt:stage, 'dev'}
+  # TODO: Move Dublin Bike API Key to more secure location
+  apiKey: 0d6ab5aa64bce5f166c365c079f4e0fef0073fc8
+
+provider:
+  name: aws
+  runtime: python3.8
+# you can overwrite defaults here
+  stage: dev
+  region: eu-west-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:ListBucket"
+      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+    - Effect: "Allow"
+      Action:
+        - "s3:PutObject"
+      Resource:
+        Fn::Join:
+          - ""
+          - - "arn:aws:s3:::"
+            - "Ref" : "ServerlessDeploymentBucket"
+            - "/*"
+    # TODO: make more granular
+    - Effect: "Allow"
+      Action:
+        - "s3:*"
+      Resource: "*"
+  environment:
+   BUCKET_NAME: ${self:custom.bucketName}
+   API_KEY: ${self:custom.apiKey}
+
+functions:
+  data_fetcher:
+    handler: handler.data_fetcher
+    events:
+      - schedule:
+          rate: cron(0/5 * * * ? *)
+          enabled: true
+    memorySize: 128
+    timeout: 10
+    provisionedConcurrency: 1
+    tags:
+      stage: ${opt:stage, 'dev'}
+
+resources:
+  Resources:
+    S3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
+
+plugins:
+  - serverless-python-requirements

@@ -1,0 +1,62 @@
+{
+  "index_patterns": ["dublin-bikes*"],
+  "order": 10,
+  "version": 1,
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "properties": {
+      "number": {
+        "type": "integer"
+      },
+      "contract_name": {
+        "type": "keyword"
+      },
+      "name": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "address": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "position": {
+        "type": "geo_point"
+      },
+      "banking": {
+        "type": "boolean"
+      },
+      "bonus": {
+        "type": "boolean"
+      },
+      "bike_stands": {
+        "type": "integer"
+      },
+      "available_bike_stands": {
+        "type": "integer"
+      },
+      "available_bikes": {
+        "type": "integer"
+      },
+      "status": {
+        "type": "keyword"
+      },
+      "last_update": {
+        "type": "date"
+      },
+      "ts": {
+        "type": "date"
+      }
+    }
+  }
+}
