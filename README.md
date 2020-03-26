@@ -6,3 +6,6 @@ Structure:
 * [dublinbike-data-fetcher](./dublinbike-data-fetcher) - serverless app that fetches data and stores in S3
 * [local-data-visualisation](./local-data-visualisation) - local ES and Kibana stack that feches the data and visualize it
 
+## TODO
+
+- [ ] screenshot of Kibana
