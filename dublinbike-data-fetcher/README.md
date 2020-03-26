@@ -21,6 +21,6 @@ sls deploy
 
 ## TODO
 
-[] compress files. It will bring data reduction of 85%
-[] define infra variables in separate file (bucket name...)
-[] check tracing https://serverless.com/framework/docs/providers/aws/guide/functions#aws-x-ray-tracing
+- [ ] compress files. It will bring data reduction of 85%
+- [ ] define infra variables in separate file (bucket name...)
+- [ ] check tracing https://serverless.com/framework/docs/providers/aws/guide/functions#aws-x-ray-tracing
