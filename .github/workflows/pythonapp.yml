@@ -22,7 +22,7 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        pipenv run flake8
+        pipenv --python `which python` run flake8
     - name: Test with pytest
       run: |
-        pipenv run pytest
+        pipenv --python `which python` run pytest
