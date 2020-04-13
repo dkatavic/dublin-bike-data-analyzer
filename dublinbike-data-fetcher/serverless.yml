@@ -48,7 +48,6 @@ functions:
           enabled: true
     memorySize: 128
     timeout: 30
-    provisionedConcurrency: 1
     tags:
       stage: ${opt:stage, 'dev'}
 
