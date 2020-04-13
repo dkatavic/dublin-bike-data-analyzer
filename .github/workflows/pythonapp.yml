@@ -21,11 +21,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r dublinbike-data-fetcher/requirements.txt
+        pip install --user pipenv
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8
+        pipenv run flake8
     - name: Test with pytest
       run: |
-        pytest
+        pipenv run pytest
